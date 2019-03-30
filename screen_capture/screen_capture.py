@@ -4,7 +4,7 @@ import numpy as _np
 class ScreenCapture(object):
     def __init__(self):
         self._regions = {}
-        self._sct = mss.mss()
+        self._sct = _mss.mss()
 
     def create_new_region(self, label, bounding):
         self._regions[label] = bounding
