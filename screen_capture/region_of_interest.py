@@ -1,5 +1,10 @@
-import pygame
-pygame.init()
+import pygame, sys
+from pygame.locals import *
+
+from PIL import ImageGrab
+from PIL import Image
+
+
 
 def reorder(x1, y1, x2, y2):
 
@@ -14,12 +19,6 @@ def reorder(x1, y1, x2, y2):
     return {"x": low_x, "y": low_y, "width": width, "height": height}
 
 def select_region():
-    import pygame, sys
-    from pygame.locals import *
-
-    from PIL import ImageGrab
-    from PIL import Image
-    
     image = ImageGrab.grab()
 
     mode = image.mode
@@ -42,10 +41,11 @@ def select_region():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 mainLoop = False
-            
+
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     mainLoop = False
+                    continue
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
@@ -58,7 +58,7 @@ def select_region():
                 if len(return_dict.keys()) == 2:
                    return_dict["x2"] =  pos[0]
                    return_dict["y2"] =  pos[1]
-            
+
         pos = pygame.mouse.get_pos()
         if len(return_dict.keys()) == 2:
             bb_dict = reorder(return_dict["x1"], return_dict["y1"], pos[0], pos[1])
@@ -71,7 +71,9 @@ def select_region():
 
     pygame.quit()
 
-    return reorder(return_dict["x1"], return_dict["y1"], return_dict["x2"], return_dict["y2"])
-
+    if(len(return_dict.keys()) == 4):
+        return reorder(return_dict["x1"], return_dict["y1"], return_dict["x2"], return_dict["y2"])
+    else:
+        return return_dict
 
 
