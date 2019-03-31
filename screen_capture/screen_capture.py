@@ -14,7 +14,7 @@ class ScreenCapture(object):
 
     def delete_region(self, label):
         del self._regions[label]
-    
+
     def get_labels(self):
         return self._region.keys()
 

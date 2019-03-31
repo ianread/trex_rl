@@ -4,8 +4,6 @@ from pygame.locals import *
 from PIL import ImageGrab
 from PIL import Image
 
-
-
 def reorder(x1, y1, x2, y2):
 
     low_x = x2 if (x1 > x2) else x1
