@@ -16,10 +16,10 @@ class ScreenCapture(object):
         del self._regions[label]
 
     def get_labels(self):
-        return self._region.keys()
+        return self._regions.keys()
 
     def get_next(self):
         regions_returned = {}
         for label in self._regions:
-            regions_returned[label] = _np.array(self._sct.grab(self._region[label]))
+            regions_returned[label] = _np.array(self._sct.grab(self._regions[label]))
         return regions_returned
