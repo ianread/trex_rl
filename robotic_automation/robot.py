@@ -15,6 +15,6 @@ class Robot(object):
     def press_up(self):
         _pag.press('up')
 
-    def press_space(self)
+    def press_space(self):
         _pag.press('space')
 

@@ -14,7 +14,7 @@ def reorder(x1, y1, x2, y2):
     width = high_x - low_x
     height = high_y - low_y
 
-    return {"x": low_x, "y": low_y, "width": width, "height": height}
+    return {"left": low_x, "top": low_y, "width": width, "height": height}
 
 def select_region():
     image = ImageGrab.grab()
@@ -24,11 +24,14 @@ def select_region():
     data = image.tobytes()
 
     pygame.init()
-    pygame.display.set_mode(image.size)
+    # print(image.size)
 
     DISPLAYSURF = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
+    infoObject = pygame.display.Info()
+
     py_image = pygame.image.fromstring(data, size, mode)
+    py_image = pygame.transform.scale(py_image, (infoObject.current_w, infoObject.current_h))
 
     mainLoop = True
 
@@ -60,7 +63,7 @@ def select_region():
         pos = pygame.mouse.get_pos()
         if len(return_dict.keys()) == 2:
             bb_dict = reorder(return_dict["x1"], return_dict["y1"], pos[0], pos[1])
-            pygame.draw.rect(DISPLAYSURF, (0,0,255), (bb_dict["x"], bb_dict["y"], bb_dict["width"], bb_dict["height"]), 2)
+            pygame.draw.rect(DISPLAYSURF, (0,0,255), (bb_dict["left"], bb_dict["top"], bb_dict["width"], bb_dict["height"]), 2)
             pygame.display.update()
 
         if len(return_dict.keys()) == 4:
